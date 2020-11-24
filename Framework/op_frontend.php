@@ -42,9 +42,12 @@ function file_bottom() {
 
 }
 
-function html_table($tableData) {
+function html_table($tableData, $nomeTabela = '') {
   global $nomeCampos;
   global $delCampos;
+  global $colId;
+
+
   $numRows = count($tableData);
 
   if(!isset($delCampos)) $delCampos = array();
@@ -53,6 +56,7 @@ function html_table($tableData) {
 
   if(isset($nomeCampos)) {
     $string .= '<tr>';
+
     foreach ($nomeCampos as $key => $value) {
 
       $string .= '<th>';
@@ -62,16 +66,19 @@ function html_table($tableData) {
     }
     $string .= '</tr>';
   }
-  for ($i=0; $i < $numRows ; $i++) {
+  for ($i=0; $i < $numRows ; $i++) { // Linhas <tr>
     $string .= '<tr>';
 
-    foreach ($tableData[$i] as $key => $value) {
+    foreach ($tableData[$i] as $key => $value) { // Colunas (<td>)
       if(array_search($key, $delCampos) === FALSE) {
-      $string .= '<td>';
-      $string .= $value;
-      $string .= '</td>';
+
+        if($key == $colId) $idSql = $value;
+        $string .= '<td>';
+        $string .= $value;
+        $string .= '</td>';
     }
  }
+    $string .= '<td><a href="deleteGeral.php?tabela='.$nomeTabela.'&id='.$idSql.'">DELETAR REGISTRO</a></td>'; // Adicionando coluna que DELETA  EM TODO O SISTEMA, ou seja, todas as tabelas terão uma coluna a mais
     $string .= '</tr>';
   }
 

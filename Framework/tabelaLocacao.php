@@ -2,7 +2,7 @@
 
 
 $nomeTabela = "tb_locacao";
-$colId = "TB_FUNCIONARIO_ID";
+$colId = "TB_LOCACAO_ID";
 
 
 
