@@ -86,5 +86,17 @@ function updateString($entrada, $id) {
         return $stmt_final;
 }
 
+function selectString( $id = NULL ) {
+
+  global $nomeTabela;
+  global $colId;
+
+  $stmt = "SELECT * FROM $nomeTabela";
+
+  if($id != NULL) $stmt .= " WHERE $colId = $id";
+
+  return $stmt;
+}
+
 
  ?>
